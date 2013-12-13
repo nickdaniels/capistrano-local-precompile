@@ -39,7 +39,7 @@ module Capistrano
 
             desc "Precompile assets locally and then rsync to app servers"
             task :precompile, :only => { :primary => true }, :on_no_matching_servers => :continue do
-              run "rm #{current_path}/#{fetch(:assets_dir)}/manifest-*"
+              run "rm -f #{release_path}/#{fetch(:assets_dir)}/manifest-*"
 
               servers = find_servers :roles => assets_role, :except => { :no_release => true }
               servers.each do |srvr|
